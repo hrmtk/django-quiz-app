@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block scripts}
+{% endblock scripts}
+
+{% block title %}
+Quiz List
+{% endblock title %}
+
+{% block content %}
+<div class="h1 page-title text-white">Manabit | Quiz List</div>
+<hr>
+
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for obj in object_list %}
+
+    <!-- Button trigger modal -->
+    <!-- Card -->
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="card-header h3">{{obj.quiz_title}}</div>
+            <dl>
+              <dt>Number of questions</dt>
+              <dd>- {{obj.num_of_question}}</dd>
+              <dt>Duration</dt>
+              <dd>- {{obj.time}} min(s)</dd>
+              <dt>Created by</dt>
+              <dd>- {{obj.created_by}}</dd>
+            </dl>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">{{obj.topic}}</small>
+          </div>
+        </div>
+      </div>
+    </button>
+
+    {% endfor %}
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="quizStartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you ready to start?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">no</button>
+        <button type="button" class="btn btn-info">yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
