@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block scripts %}
+	<script src="{% static 'quiz/question.js' %}" defer></script>
+{% endblock scripts %}
+
+{% block title %}
+{{ quiz.quiz_title }}
+{% endblock title %}
+
+{% block page-title %}
+{{ quiz.quiz_title }}
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col text-right" id="timer-box">00:00</div>
+</div>
+<a href="{% url 'quiz:quiz_list' %}" button class="btn btn-danger">go back</a>
+<br>
+hello from question.html
+{% for q in que %}
+<div class="quiz-box">
+	<div class="mb-2">
+		<b>{{ q.question_text }}</b>
+	</div>
+	<div>
+		<input type="radio" class="ans" id="ans">
+		<label for="{{q.qestion_text}}">{{q.option_one}}</label>
+	</div>
+	<p> {{ q.question_text }} </p>
+</div>
+{% endfor %}
+{% endblock %}

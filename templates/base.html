@@ -21,14 +21,16 @@
 	<!-- Custom js -->
 	<script src="{% static 'functions.js' %}" defer></script>
 	{% block scripts %}
-	{% endblock scripts %}
+	{% endblock %}
 
-	<title>{% block title %}{% endblock title  %}</title>
+	<title>{% block title %}{% endblock %}</title>
 </head>
 <body>
 	<div class="container mt-3">
+		<div class="h1 page-title text-white">Manabit | {% block page-title %}{% endblock %}</div>
+		<hr>
 		{% block content %}
-		{% endblock content %}
+		{% endblock %}
 	</div>
 
 	<!-- JavaScript Bundle with Popper -->

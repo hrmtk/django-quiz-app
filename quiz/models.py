@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import random
 
 TOPIC_CHOICES = (
 	('Computer Science', 'Computer Science'),
@@ -25,6 +26,11 @@ class Quiz(models.Model):
 
 	def __str__(self):
 		return str(self.quiz_title)
+
+	def get_questions(self):
+		questions = list(self.question_set.all())
+		random.shuffle(questions)
+		return questions
 
 	class Meta:
 		verbose_name_plural = 'Quizzes'

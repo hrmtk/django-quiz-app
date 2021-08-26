@@ -1,11 +1,14 @@
 body {
 	background: url("/static/img/books.jpg") 20% 0 no-repeat fixed;
-	
+}
+
+.not-visible {
+	display: none;
 }
 
 .card {
 	background: linear-gradient(0deg, rgba(250,252,252,1) 0%, rgba(226,205,163,1) 100%);
-	opacity: 0.7;
+	opacity: 0.8;
 }
 
 .card:hover {
