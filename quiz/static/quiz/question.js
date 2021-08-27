@@ -1,13 +1,14 @@
-
+const url = window.location.href
 
 $.ajax({
 	type: 'GET',
-	url: `${url}data`,
+	url: `${url}/detail`,
 	success: function(res) {
-		const data = response.data
-		// console.log(data)
+		const data = res.data
+		const ques = res.ques
+		console.log(data, ques)
 	},
 	error: function(error) {
-		console.log(error)
+		console.log('error', error)
 	}
 })

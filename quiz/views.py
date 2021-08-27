@@ -19,12 +19,14 @@ def question_view(request, pk):
 		}
 	)
 
-# def questions_view(request, pk):
-# 	quiz = Quiz.objects.get(pk=pk)
-# 	questions = []
-# 	for q in quiz.get_questions():
-# 		questions.append({str(q)})
-# 	return JsonResponse({
-# 		'data': questions,
-# 	})
-	# pass
+def question_detail_view(request, pk):
+	quiz = Quiz.objects.get(pk=pk)
+	questions = quiz.get_questions()
+	ques = []
+	for q in questions:
+		ques.append({str(quiz.quiz_title): q.correct_num})
+
+	return JsonResponse({
+		'data': quiz.quiz_title,
+		'ques': ques,
+	})

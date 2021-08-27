@@ -20,17 +20,39 @@
 </div>
 <a href="{% url 'quiz:quiz_list' %}" button class="btn btn-danger">go back</a>
 <br>
-hello from question.html
-{% for q in que %}
-<div class="quiz-box">
-	<div class="mb-2">
-		<b>{{ q.question_text }}</b>
+
+<form id="quiz-form" class="mt-3 mb-3">
+	{% csrf_token %}
+	{% for q in que %}
+	<hr>
+	<div id="quiz-box">
+
+		<!-- Question -->
+		<div class="mb-2">
+			<b>{{ q.question_text }}</b>
+		</div>
+
+		<!-- Answer -->
+		<div>
+			<input type="radio" class="answer" id="ans-1" name="{{q.question_text}}" value="{{q.option_one}}">
+			<label for="{{q.question_text}}-1">{{q.option_one}}</label>
+		</div>
+		<div>
+			<input type="radio" class="answer" id="ans-2" name="{{q.question_text}}" value="{{q.option_two}}">
+			<label for="{{q.question_text}}-2">{{q.option_two}}</label>
+		</div>
+		<div>
+			<input type="radio" class="answer" id="ans-3" name="{{q.question_text}}" value="{{q.option_three}}">
+			<label for="{{q.question_text}}-3">{{q.option_three}}</label>
+		</div>
+		<div>
+			<input type="radio" class="answer" id="ans-4" name="{{q.question_text}}" value="{{q.option_four}}">
+			<label for="{{q.question_text}}-4">{{q.option_four}}</label>
+		</div>
 	</div>
-	<div>
-		<input type="radio" class="ans" id="ans">
-		<label for="{{q.qestion_text}}">{{q.option_one}}</label>
-	</div>
-	<p> {{ q.question_text }} </p>
-</div>
-{% endfor %}
+	{% endfor %}
+	<button type="submit" class="btn btn-primary mt-3">save</button>
+</form>
+
+
 {% endblock %}
