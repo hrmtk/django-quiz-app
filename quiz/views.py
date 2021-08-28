@@ -21,12 +21,22 @@ def question_view(request, pk):
 
 def question_detail_view(request, pk):
 	quiz = Quiz.objects.get(pk=pk)
-	questions = quiz.get_questions()
-	ques = []
-	for q in questions:
-		ques.append({str(quiz.quiz_title): q.correct_num})
+	ques = quiz.get_questions()
+	questions = []
+	for q in ques:
+		# ques_answers = {
+		# 	"question": q.question_text,
+		# 	"ans1": q.option_one,
+		# }
+		ques_answers = [
+			q.option_one,
+			q.option_two,
+			q.option_three,
+			q.option_four
+		]
+		questions.append({q.question_text: ques_answers})
 
 	return JsonResponse({
 		'data': quiz.quiz_title,
-		'ques': ques,
+		'questions': questions,
 	})
