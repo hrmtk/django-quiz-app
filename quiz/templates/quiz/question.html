@@ -18,15 +18,14 @@
 <div class="row">
 	<div class="col text-right" id="timer-box">00:00</div>
 </div>
-<a href="{% url 'quiz:quiz_list' %}" button class="btn btn-danger">go back</a>
 <br>
-
+<div id="alert-box"></div>
 <form id="quiz-form" class="mt-3 mb-3">
 	{% csrf_token %}
-	{% for q in que %}
 	<div id="quiz-box"></div>
-	{% endfor %}
-	<button type="submit" class="btn btn-primary mt-3">save</button>
+	<button type="submit" class="btn btn-info mt-3">save</button>
+<a href="{% url 'quiz:quiz_list' %}" button class="btn btn-light">back</a>
+
 </form>
 
 

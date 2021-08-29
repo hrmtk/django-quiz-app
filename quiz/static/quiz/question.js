@@ -1,5 +1,6 @@
 const url = window.location.href
 const quizBox = document.getElementById("quiz-box")
+const alertBox = document.getElementById('alert-box')
 
 $.ajax({
 	type: 'GET',
@@ -12,18 +13,21 @@ $.ajax({
 
 				quizBox.innerHTML += `
 					<hr>
-					<div class="mb-2">
+					<div class="mb-2 ${key}">
 						<b>${key}</b>
 					</div>
 					`
-					el[key].forEach(answer => {
-						quizBox.innerHTML += `
-							<div>
-								<input type="radio" class="answer" id="${key}-${answer}" name="${key}" value="${answer}">
-								<label for="${key}">${answer}</label>
-							</div>
-						`
-					})
+				el[key].forEach(answer => {
+					quizBox.innerHTML += `
+						<div>
+							<input type="radio" class="answer" id="${key}-${answer}" name="${key}" value="${answer}">
+							<label for="${key}">${answer}</label>
+						</div>
+					`
+				})
+				quizBox.innerHTML +=	`
+					<div id="${key}-msg"></div>
+				`
 			})
 		})
 	},
@@ -48,14 +52,22 @@ const sendAnswer = () => {
 			}
 		}
 	})
-	// console.log(answered)
 
 	$.ajax({
 		type: 'POST',
 		url: `${url}/save`,
 		data: answered,
 		success: function(res) {
-			console.log('success');
+			results = res.results
+			score = res.score
+
+			results.forEach(result => {
+				for (const [question, message] of Object.entries(result)) {
+					const ansChecked = document.getElementById(`${question}-msg`)
+					ansChecked.innerText = message;
+				}
+			})
+			handleAlerts('success', 'success')
 		},
 		error: function(error) {
 			console.log(error);

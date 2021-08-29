@@ -51,10 +51,17 @@ def save_answer_view(request, pk):
 		]
 
 		score = 0
+		results = []
 		for q in questions:
+			message = ""
 			ans = answer_[q.question_text][0]
 			if (ans.isdigit() and int(ans) == q.correct_num):
 				score += 1
+				message = "Correct!"
+			else:
+				message = f"Your answer: {ans}, Correct: {q.correct_num}"
+			results.append({str(q.question_text): message})
+		score_ = score * 100 / quiz.num_of_question
 
 		# quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
 		# user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -63,4 +70,4 @@ def save_answer_view(request, pk):
 		
 
 
-		return JsonResponse({})
+		return JsonResponse({'results': results, 'score': score_})
