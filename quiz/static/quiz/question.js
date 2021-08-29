@@ -31,3 +31,39 @@ $.ajax({
 		console.log('error', error)
 	}
 })
+
+const quizForm = document.getElementById('quiz-form')
+const csrf = document.getElementsByName('csrfmiddlewaretoken')
+
+const sendAnswer = () => {
+	const elements = [...document.getElementsByClassName('answer')]
+	const answered = {}
+	answered['csrfmiddlewaretoken'] = csrf[0].value
+	elements.forEach(el => {
+		if (el.checked) {
+			answered[el.name] = el.value
+		} else {
+			if (!answered[el.name]) {
+				answered[el.name] = null
+			}
+		}
+	})
+	// console.log(answered)
+
+	$.ajax({
+		type: 'POST',
+		url: `${url}/save`,
+		data: answered,
+		success: function(res) {
+			console.log('success');
+		},
+		error: function(error) {
+			console.log(error);
+		}
+	})
+}
+
+quizForm.addEventListener('submit', e=> {
+	e.preventDefault()
+	sendAnswer()
+})

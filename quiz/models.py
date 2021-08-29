@@ -10,6 +10,7 @@ TOPIC_CHOICES = (
 	('Others', 'Others'),
 )
 
+
 class Topic(models.Model):
 	topic_title = models.CharField(max_length=30, choices=TOPIC_CHOICES)
 
