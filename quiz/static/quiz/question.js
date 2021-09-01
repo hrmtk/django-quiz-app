@@ -5,7 +5,7 @@ const alertBox = document.getElementById('alert-box');
 
 $.ajax({
 	type: 'GET',
-	url: `${url}/detail`,
+	url: `${url}detail`,
 	success: function(res) {
 		const data = res.data;
 		const questions = res.questions;
@@ -59,7 +59,7 @@ const sendAnswer = () => {
 
 	$.ajax({
 		type: 'POST',
-		url: `${url}/save`,
+		url: `${url}save/`,
 		data: answered,
 		success: function(res) {
 			results = res.results;

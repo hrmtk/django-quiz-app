@@ -45,6 +45,7 @@ def save_answer_view(request, pk):
 		answer_ = dict(answer.lists())
 		answer_.pop('csrfmiddlewaretoken')
 		quiz = Quiz.objects.get(pk=pk)
+		user = request.user
 		questions = [
 			Question.objects.get(question_text=key, quiz=quiz)
 			for key in answer_.keys()
@@ -63,11 +64,7 @@ def save_answer_view(request, pk):
 			results.append({str(q.question_text): message})
 		score_ = score * 100 / quiz.num_of_question
 
-		# quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-		# user = models.ForeignKey(User, on_delete=models.CASCADE)
-		# score = models.FloatField()
-		# created = models.DateTimeField(auto_now_add=True)
-		
-
+		# Save result
+		Result.objects.create(quiz=quiz, user=user, score=score_)
 
 		return JsonResponse({'results': results, 'score': score_})
