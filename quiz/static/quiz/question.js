@@ -1,6 +1,6 @@
 // Get data
 const url = window.location.href;
-const quizBox = document.getElementById("quiz-box");
+const quizBox = document.getElementById('quiz-box');
 const alertBox = document.getElementById('alert-box');
 
 $.ajax({
@@ -82,7 +82,7 @@ const sendAnswer = () => {
 quizForm.addEventListener('submit', e=> {
 	e.preventDefault();
 	sendAnswer();
-})
+	clearInterval(countdown)})
 
 
 // Countdown timer
@@ -108,13 +108,9 @@ function timer(seconds) {
 }
 
 function formatTime(seconds) {
-	let minutes = Math.floor(seconds / 60);
-	if (minutes < 10) {
-		minutes = `0${minutes}`;
+	const pad = function(s){ 
+		return (s >= 10) ? s : `0${s}`;
 	}
-	let secs = seconds % 60;
-	if (secs < 10) {
-		secs = `0${secs}`;
-	}
-	return `${minutes}:${secs}`;
+	return pad(parseInt(seconds / 60 % 60)) + 
+		':' + pad(parseInt(seconds % 60));
 }

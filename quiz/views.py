@@ -65,6 +65,6 @@ def save_answer_view(request, pk):
 		score_ = score * 100 / quiz.num_of_question
 
 		# Save result
-		Result.objects.create(quiz=quiz, user=user, score=score_)
+		# Result.objects.create(quiz=quiz, user=user, score=score_)
 
 		return JsonResponse({'results': results, 'score': score_})
