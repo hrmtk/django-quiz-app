@@ -1,16 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Ubuntu:ital,wght@0,300;1,300&display=swap');
+
 body {
-	/*background: url("/static/img/books.jpg") 20% 0 no-repeat fixed;*/
+	font-family: 'Orbitron', sans-serif;
 }
 
 .not-visible {
 	display: none;
 }
 
+/* Quiz-list page*/
 .card {
-	background: linear-gradient(0deg, rgba(250,252,252,1) 0%, rgba(226,205,163,1) 100%);
+	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(146,219,222,1) 0%, rgba(252,252,252,1) 100%);
 	opacity: 0.8;
+	transition: .5s ease;
 }
 
 .card:hover {
-	background-color: tomato;
+	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+	color: beige;
+}
+
+/* Question page*/
+#quiz-box {
+	font-family: 'Ubuntu', sans-serif;
+}
+
+#quiz-box > div {
+	padding: 8px 0;
+}
+
+.answer {
+	padding: 8px 10px;
+}
+
+.checked-msg {
+	font-style: italic;
 }

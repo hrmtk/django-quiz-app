@@ -14,20 +14,22 @@ $.ajax({
 
 				quizBox.innerHTML += `
 					<hr>
-					<div class="mb-2 ${key}">
+					<div class="mb-2 ${key} h5">
 						<b>${key}</b>
 					</div>
 					`
+				let question_num = 0;
 				el[key].forEach(answer => {
 					quizBox.innerHTML += `
 						<div>
+							<label>${++question_num}.</label>
 							<input type="radio" class="answer" id="${key}-${answer}" name="${key}" value="${answer}">
 							<label for="${key}">${answer}</label>
 						</div>
 					`
 				})
 				quizBox.innerHTML +=	`
-					<div id="${key}-msg"></div>
+					<div id="${key}-msg" class="checked-msg"></div>
 				`
 			})
 		})
