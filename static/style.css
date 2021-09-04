@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Ubuntu:ital,wght@0,300;1,300&display=swap');
 
 body {
+	background: url("/static/img/bubbles.jpg") 100% 0 no-repeat fixed;
 	font-family: 'Orbitron', sans-serif;
 }
 
@@ -11,8 +12,13 @@ body {
 /* Quiz-list page*/
 .card {
 	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(146,219,222,1) 0%, rgba(252,252,252,1) 100%);
-	opacity: 0.8;
+	opacity: 0.9;
 	transition: .5s ease;
+	min-width:13rem;
+}
+
+.card-header {
+	font-size: 1.3rem;
 }
 
 .card:hover {
