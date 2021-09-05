@@ -9,6 +9,15 @@ body {
 	display: none;
 }
 
+/* Navbar */
+.nav-link {
+  border-bottom: 5px solid transparent;
+}
+
+.nav-link:hover {
+  border-bottom: 5px solid blue;
+}
+
 /* Quiz-list page*/
 .card {
 	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(146,219,222,1) 0%, rgba(252,252,252,1) 100%);
@@ -24,11 +33,14 @@ body {
 .card:hover {
 	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
 	color: beige;
+	transform: scale(1.2);
 }
 
 /* Question page*/
 #quiz-box {
+	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(146,219,222,1) 0%, rgba(252,252,252,1) 100%);
 	font-family: 'Ubuntu', sans-serif;
+	padding-left: 20px;
 }
 
 #quiz-box > div {
@@ -36,7 +48,7 @@ body {
 }
 
 .answer {
-	padding: 8px 10px;
+	margin: 8px;
 }
 
 .checked-msg {

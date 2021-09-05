@@ -73,7 +73,13 @@ const sendAnswer = () => {
 					ansChecked.innerText = message;
 				}
 			})
-			handleAlerts('success', 'success');
+
+			if (score > 60) {
+				handleAlerts('info', 'Congratulation!');
+			} else {
+				handleAlerts('danger', `Oops...Your score is ${score.toFixed(2)} %`);
+			}
+			// handleAlerts('success', score);
 		},
 		error: function(error) {
 			console.log(error);
