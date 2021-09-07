@@ -11,18 +11,25 @@ Login
 {% block content %}
 
 
-<div class="form-group text-white">
+<div class="form-body">
 	<form method="POST">
-		{% csrf_token %}
-		<div class="form-group mb-3">
-			<input type="text" class="form-control" name="username" placeholder="Username">
+		<div class="form-holder">
+			<div class="form-content">
+				<div class="form-items">
+					<h3>Login</h3>
+					{% csrf_token %}
+					<div class="form-group mb-3">
+						<input type="text" class="form-control" name="username" placeholder="Username">
+					</div>
+					<div class="form-group mb-5">
+						<input type="password" class="form-control" name="password" placeholder="Password">
+					</div>
+					<button class="btn btn-light mb-3">Login</button>
+					<br>
+					<div>Not Registered? Sign Up <a href="{% url 'register' %}"> Here...</a></div>
+				</div>
+			</div>
 		</div>
-		<div class="form-group mb-5">
-			<input type="password" class="form-control" name="password" placeholder="Password">
-		</div>
-		<button class="btn btn-secondary">Login</button>
-		<br>
-		Not Registered? Sign Up <a href="{% url 'register' %}">Here...</a>
 	</form>
 </div>
 

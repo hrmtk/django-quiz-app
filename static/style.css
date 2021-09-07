@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Ubuntu:ital,wght@0,300;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;800;900&family=Poppins:wght@300;400;500;700;900&display=swap');
 
 body {
 	background: url("/static/img/bubbles.jpg") 100% 0 no-repeat fixed;
-	font-family: 'Orbitron', sans-serif;
+	font-family: 'Poppins', sans-serif;
 }
 
 .not-visible {
@@ -15,7 +15,11 @@ body {
 }
 
 .nav-link:hover {
-  border-bottom: 5px solid blue;
+  border-bottom: 5px solid #eeaeca;
+}
+
+.navbar > div {
+	font-family: 'Orbitron', sans-serif;
 }
 
 /* Quiz-list page*/
@@ -27,19 +31,20 @@ body {
 }
 
 .card-header {
+	font-family: 'Orbitron', sans-serif;
 	font-size: 1.3rem;
 }
 
 .card:hover {
-	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
-	color: beige;
+	background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,223,233,1) 100%);
+	opacity: 1;
 	transform: scale(1.2);
 }
 
 /* Question page*/
 #quiz-box {
 	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(146,219,222,1) 0%, rgba(252,252,252,1) 100%);
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Poppins', sans-serif;
 	padding-left: 20px;
 }
 
@@ -53,4 +58,62 @@ body {
 
 .checked-msg {
 	font-style: italic;
+}
+
+/* Login and Register form */
+.form-holder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  min-width: 540px;
+  background: linear-gradient(90deg, rgba(102,191,191,1) 0%, rgba(190,223,230,1) 100%);
+}
+
+.form-holder > div{
+	font-family: 'Poppins', sans-serif;
+	color: white;
+}
+
+.form-holder .form-content {
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+}
+
+.form-items {
+  border: 3px solid #fff;
+  padding: 40px;
+  display: inline-block;
+  width: 100%;
+  min-width: 540px;
+  border-radius: 10px;
+  text-align: left;
+  transition: all 0.4s ease;
+}
+
+.form-content h3 {
+  color: #fff;
+  text-align: left;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.btn-light:hover {
+	background-color: #f76b8a;
+  outline: none !important;
+  border: none !important;
+  color: white;
+}
+
+.form-items a:link {
+  color: #f76b8a; 
+  background-color: transparent; 
+  text-decoration: none;
 }

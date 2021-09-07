@@ -11,12 +11,28 @@ Register
 {% block content %}
 
 
-<div class="form-group text-white">
+<div class="form-body">
 	<form method="POST">
-		{% csrf_token %}
-		{{ form.as_p }}
-		<button class="btn btn-secondary">Register
-	</button>
+		<div class="form-holder">
+			<div class="form-content">
+				<div class="form-items">
+					<h3>Register</h3>
+					{% csrf_token %}
+					<div class="form-group mb-3">
+						<input type="text" class="form-control" name="username" placeholder="Username">
+					</div>
+					<div class="form-group mb-3">
+						<input type="password" class="form-control" name="password1" placeholder="Password">
+					</div>
+					<div class="form-group mb-5">
+						<input type="password" class="form-control" name="password2" placeholder="Password confirmation">
+					</div>
+					<button class="btn btn-light mb-3">Register</button>
+					<br>
+					<div>Already Registered? Login <a href="{% url 'login' %}"> Here...</a></div>
+				</div>
+			</div>
+		</div>
 	</form>
 </div>
 
