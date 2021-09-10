@@ -2,11 +2,34 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from django.http import JsonResponse
 from .models import Topic, Quiz, Question, Result
+from django.views.generic.edit import FormMixin
+from .forms import QuizForm, QuestionForm
 
 
-class QuizListView(ListView):
-	model = Quiz
-	template_name = 'quiz/main.html'
+def home_view(request):
+	object_list = Quiz.objects.all()
+	if request.method == 'POST':
+		form1 = QuizForm(request.POST)
+		if form1.is_valid():
+			form1.save()
+
+	else:
+		form1 = QuizForm()
+	return render(request, 'quiz/main.html', {
+		'form1': form1,
+		'object_list': object_list
+	})
+	# form1 = QuizForm(request.POST or None)
+	# if form1.is_valid():
+	# 	form1.save()
+	# 	print('save')
+	# form2 = QuestionForm()
+	# context = {
+	# 	'form1': form1,
+	# 	'form2': form2,
+	# 	'object_list': object_list
+	# }
+	# return render(request, 'quiz/main.html', context)
 
 
 def question_view(request, pk):

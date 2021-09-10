@@ -78,5 +78,66 @@ Quiz List
 
 
 
+<!-- Modal -->
+  <div class="modal fade" id="addQuiz" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create post</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="post-form">
+            {% csrf_token %}
+            {{ form1.as_p }}
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
+              <button type="submit" class="btn btn-success">+ add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-info mb-2" data-bs-toggle="modal" data-bs-target="#addQuiz">
+    add post
+  </button>
+
+
+
+
+
+  <!-- Modal -->
+  <!-- <div class="modal fade" id="addQuestion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create post</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="post-form">
+            {% csrf_token %}
+            {{ forms.question.as_p }}
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
+              <button type="submit" class="btn btn-success">+ add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button trigger modal -->
+  <!-- <button type="button" class="btn btn-info mb-2" data-bs-toggle="modal" data-bs-target="#addQuestion">
+    add post
+  </button> -->
+ -->
+
+
 {% endblock %}
 
