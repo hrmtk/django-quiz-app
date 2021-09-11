@@ -7,29 +7,24 @@ from .forms import QuizForm, QuestionForm
 
 
 def home_view(request):
-	object_list = Quiz.objects.all()
-	if request.method == 'POST':
-		form1 = QuizForm(request.POST)
-		if form1.is_valid():
-			form1.save()
+	objects = Quiz.objects.all()
+	form1 = QuizForm()
+	context = {
+		'objects': objects,
+		'form1': form1
+	}
 
-	else:
-		form1 = QuizForm()
-	return render(request, 'quiz/main.html', {
-		'form1': form1,
-		'object_list': object_list
-	})
-	# form1 = QuizForm(request.POST or None)
-	# if form1.is_valid():
-	# 	form1.save()
-	# 	print('save')
-	# form2 = QuestionForm()
-	# context = {
-	# 	'form1': form1,
-	# 	'form2': form2,
-	# 	'object_list': object_list
-	# }
-	# return render(request, 'quiz/main.html', context)
+	return render(request, 'quiz/main.html', context)
+	
+
+def add_quiz(request):
+	if request.is_ajax():
+		form = QuizForm(request.POST)
+		if form.is_valid():
+			instance = form.save(commit=False)
+			instance.created_by = request.user
+			instance.save()
+		return JsonResponse({})
 
 
 def question_view(request, pk):

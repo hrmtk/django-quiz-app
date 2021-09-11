@@ -18,7 +18,7 @@ Quiz List
 
 <div class="container" id="quiz-list-view">
   <div class="row row-cols-1 row-cols-md-3 g-4">
-    {% for obj in object_list %}
+    {% for obj in objects %}
 
     <!-- Button trigger modal -->
     <!-- Card -->
@@ -83,11 +83,11 @@ Quiz List
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Create post</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Create quiz</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="post-form">
+          <form id="quiz-form">
             {% csrf_token %}
             {{ form1.as_p }}
             <div class="modal-footer">
@@ -102,7 +102,7 @@ Quiz List
 
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-info mb-2" data-bs-toggle="modal" data-bs-target="#addQuiz">
-    add post
+    add quiz
   </button>
 
 
@@ -136,7 +136,7 @@ Quiz List
   <!-- <button type="button" class="btn btn-info mb-2" data-bs-toggle="modal" data-bs-target="#addQuestion">
     add post
   </button> -->
- -->
+ 
 
 
 {% endblock %}
