@@ -5,7 +5,7 @@ const modalTitle = document.getElementById('modalTitle')
 const startBtn = document.getElementById('start-button')
 const quizView = document.getElementById('quiz-list-view')
 
-const quizUrl = window.location.href + "add/"
+const quizUrl = window.location.href + "create/"
 const quizForm = document.getElementById('quiz-form')
 
 const quizTitleInput = document.getElementById('id_quiz_title')
@@ -42,7 +42,8 @@ quizForm.addEventListener('submit', e=> {
 			'time': timeInput.value
 		},
 		success: function(response) {
-			$('#addQuiz').modal('hide')
+
+			$('#createQuiz').modal('hide')
 			quizForm.reset()
 		},
 		error: function(error) {

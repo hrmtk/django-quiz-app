@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block scripts %}
   <script src="{% static 'quiz/main.js' %}" defer></script>
@@ -17,47 +18,89 @@ Quiz List
 {% block content %}
 
 <div class="container" id="quiz-list-view">
+  <!-- Button trigger create quiz modal -->
+  <button type="button" class="btn btn-light mb-2" data-bs-toggle="modal" data-bs-target="#createQuiz">
+    create quiz
+  </button>
+
   <div class="row row-cols-1 row-cols-md-3 g-4">
+
     {% for obj in objects %}
 
-    <!-- Button trigger modal -->
+    <!-- Button trigger each quiz start modal -->
     <!-- Card -->
-    <button
-      type="button"
-      class="btn modal-button text-left" 
-      data-pk="{{ obj.pk }}"
-      data-quiz="{{ obj.quiz_title }}"
-      data-bs-toggle="modal" 
-      data-bs-target="#quizStartModal"
-    >
       <div class="col">
         <div class="card">
           <div class="card-body">
-            <div class="card-header">{{obj.quiz_title}}</div>
+            <div class="card-header text-center">{{obj.quiz_title}}</div>
             <div class="card-text text-left">
               <dl>
                 <dt>Number of questions</dt>
-                <dd>{{obj.num_of_question}}</dd>
+                <dd>{{obj.number_of_question}}</dd>
                 <dt>Duration</dt>
                 <dd>{{obj.time}} min(s)</dd>
                 <dt>Created by</dt>
                 <dd>{{obj.created_by}}</dd>
               </dl>
             </div>
+            <button
+              type="button"
+              class="btn btn-info modal-button" 
+              data-pk="{{ obj.pk }}"
+              data-quiz="{{ obj.quiz_title }}"
+              data-bs-toggle="modal" 
+              data-bs-target="#quizStartModal"
+            >
+            start
+            </button>
+            {% if request.user == obj.created_by %}
+              <button
+              type="button"
+              class="btn btn-outline-success modal-button" 
+              data-pk="{{ obj.pk }}"
+              data-quiz="{{ obj.quiz_title }}"
+              data-bs-toggle="modal" 
+              data-bs-target="#addQuestion"
+              >
+              add
+              </button>
+            {% endif %}
           </div>
-          <div class="card-footer">
+          <div class="card-footer text-center">
             <small class="text-muted">{{obj.topic}}</small>
           </div>
         </div>
       </div>
-    </button>
 
     {% endfor %}
   </div>
 </div>
 
 
-<!-- Modal -->
+<!-- Create quiz modal -->
+<div class="modal fade" id="createQuiz" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create quiz</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="quiz-form">
+          {% csrf_token %}
+          {{ form1|crispy }}
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">close</button>
+            <button type="submit" class="btn btn-info">create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Quiz start modal -->
 <div class="modal fade" id="quizStartModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -77,65 +120,28 @@ Quiz List
 </div>
 
 
-
-<!-- Modal -->
-  <div class="modal fade" id="addQuiz" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Create quiz</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="quiz-form">
-            {% csrf_token %}
-            {{ form1.as_p }}
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
-              <button type="submit" class="btn btn-success">+ add</button>
-            </div>
-          </form>
-        </div>
+<!-- Add question modal -->
+<div class="modal fade" id="addQuestion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add question</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="post-form">
+          {% csrf_token %}
+          {{ form2|crispy }}
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">close</button>
+            <button type="submit" class="btn btn-success">+ add</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-info mb-2" data-bs-toggle="modal" data-bs-target="#addQuiz">
-    add quiz
-  </button>
-
-
-
-
-
-  <!-- Modal -->
-  <!-- <div class="modal fade" id="addQuestion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Create post</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="post-form">
-            {% csrf_token %}
-            {{ forms.question.as_p }}
-            
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
-              <button type="submit" class="btn btn-success">+ add</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Button trigger modal -->
-  <!-- <button type="button" class="btn btn-info mb-2" data-bs-toggle="modal" data-bs-target="#addQuestion">
-    add post
-  </button> -->
  
 
 

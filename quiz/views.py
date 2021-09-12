@@ -1,26 +1,28 @@
 from django.shortcuts import render
-from django.views.generic import ListView
 from django.http import JsonResponse
+from django.db.models import Count
 from .models import Topic, Quiz, Question, Result
-from django.views.generic.edit import FormMixin
 from .forms import QuizForm, QuestionForm
 
 
 def home_view(request):
-	objects = Quiz.objects.all()
+	objects = Quiz.objects.annotate(number_of_question=Count('question'))
 	form1 = QuizForm()
+	form2 = QuestionForm()
 	context = {
 		'objects': objects,
-		'form1': form1
+		'form1': form1,
+		'form2': form2,
 	}
 
 	return render(request, 'quiz/main.html', context)
 	
 
-def add_quiz(request):
+def create_quiz(request):
 	if request.is_ajax():
 		form = QuizForm(request.POST)
 		if form.is_valid():
+			print('hi')
 			instance = form.save(commit=False)
 			instance.created_by = request.user
 			instance.save()

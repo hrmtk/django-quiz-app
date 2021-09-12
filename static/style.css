@@ -22,7 +22,7 @@ body {
 	font-family: 'Orbitron', sans-serif;
 }
 
-/* Quiz-list page*/
+/* home page*/
 .card {
 	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(146,219,222,1) 0%, rgba(252,252,252,1) 100%);
 	opacity: 0.9;
@@ -109,6 +109,7 @@ body {
 	background-color: #f76b8a;
   outline: none !important;
   border: none !important;
+  box-shadow: none !important;
   color: white;
 }
 
