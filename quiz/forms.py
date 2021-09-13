@@ -10,4 +10,4 @@ class QuizForm(forms.ModelForm):
 class QuestionForm(forms.ModelForm):
 	class Meta:
 		model = Question
-		fields = "__all__"
+		exclude = ['quiz']

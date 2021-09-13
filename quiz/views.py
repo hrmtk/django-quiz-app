@@ -22,9 +22,20 @@ def create_quiz(request):
 	if request.is_ajax():
 		form = QuizForm(request.POST)
 		if form.is_valid():
-			print('hi')
 			instance = form.save(commit=False)
 			instance.created_by = request.user
+			instance.save()
+		return JsonResponse({})
+
+
+def add_question(request):
+	if request.is_ajax():
+		form = QuestionForm(request.POST)
+		if form.is_valid():
+			pk = request.POST.get('pk')
+			quiz = Quiz.objects.get(pk=pk)
+			instance = form.save(commit=False)
+			instance.quiz = quiz
 			instance.save()
 		return JsonResponse({})
 
@@ -82,7 +93,8 @@ def save_answer_view(request, pk):
 			else:
 				message = f"Your answer: {ans}, Correct: {q.correct_num}"
 			results.append({str(q.question_text): message})
-		score_ = score * 100 / quiz.num_of_question
+		num_of_q = len(quiz.get_questions())
+		score_ = score * 100 / num_of_q
 
 		# Save result
 		# Result.objects.create(quiz=quiz, user=user, score=score_)

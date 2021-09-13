@@ -19,15 +19,14 @@ Quiz List
 
 <div class="container" id="quiz-list-view">
   <!-- Button trigger create quiz modal -->
-  <button type="button" class="btn btn-light mb-2" data-bs-toggle="modal" data-bs-target="#createQuiz">
+  <button type="button" class="btn btn-outline-light mb-2" data-bs-toggle="modal" data-bs-target="#createQuiz">
     create quiz
   </button>
 
   <div class="row row-cols-1 row-cols-md-3 g-4">
 
     {% for obj in objects %}
-
-    <!-- Button trigger each quiz start modal -->
+    
     <!-- Card -->
       <div class="col">
         <div class="card">
@@ -43,9 +42,11 @@ Quiz List
                 <dd>{{obj.created_by}}</dd>
               </dl>
             </div>
+
+            <!-- Button trigger each quiz start modal -->
             <button
               type="button"
-              class="btn btn-info modal-button" 
+              class="btn btn-info modal-button start-modal" 
               data-pk="{{ obj.pk }}"
               data-quiz="{{ obj.quiz_title }}"
               data-bs-toggle="modal" 
@@ -56,7 +57,7 @@ Quiz List
             {% if request.user == obj.created_by %}
               <button
               type="button"
-              class="btn btn-outline-success modal-button" 
+              class="btn btn-outline-success modal-button add-modal" 
               data-pk="{{ obj.pk }}"
               data-quiz="{{ obj.quiz_title }}"
               data-bs-toggle="modal" 
@@ -112,7 +113,7 @@ Quiz List
         Are you ready to start?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">no</button>
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">no</button>
         <button type="button" id="start-button" class="btn btn-info">yes</button>
       </div>
     </div>
@@ -121,28 +122,27 @@ Quiz List
 
 
 <!-- Add question modal -->
-<div class="modal fade" id="addQuestion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addQuestion" tabindex="-1" aria-labelledby="addModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add question</h5>
+        <h5 class="modal-title" id="addModal"></h5>
+        <!-- <h5 class="modal-title" id="exampleModalLabel">Add question</h5> -->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="post-form">
+        <form id="add-form" data-form-id="ore">
           {% csrf_token %}
           {{ form2|crispy }}
           <div class="modal-footer">
             <button type="button" class="btn btn-light" data-bs-dismiss="modal">close</button>
-            <button type="submit" class="btn btn-success">+ add</button>
+            <button type="submit" class="btn btn-info">add</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
-
- 
 
 
 {% endblock %}

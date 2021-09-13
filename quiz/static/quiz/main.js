@@ -1,39 +1,83 @@
-const url = window.location.href
+const url = window.location.href;
 
-const modalBtns = [...document.getElementsByClassName('modal-button')]
-const modalTitle = document.getElementById('modalTitle')
-const startBtn = document.getElementById('start-button')
-const quizView = document.getElementById('quiz-list-view')
+const startModals = [...document.getElementsByClassName('start-modal')];
+const modalTitle = document.getElementById('modalTitle');
+const startBtn = document.getElementById('start-button');
 
-const quizUrl = window.location.href + "create/"
-const quizForm = document.getElementById('quiz-form')
+const addModals = [...document.getElementsByClassName('add-modal')];
+const addTitle = document.getElementById('addModal');
+const addForm = document.getElementById('add-form');
 
-const quizTitleInput = document.getElementById('id_quiz_title')
-const topicInput = document.getElementById('id_topic')
-const numOfQuestionInput = document.getElementById('id_num_of_question')
-const timeInput = document.getElementById('id_time')
+const questionTextInput = document.getElementById('id_question_text');
+const correctNumInput = document.getElementById('id_correct_num');
+const optionOneInput = document.getElementById('id_option_one');
+const optionTwoInput = document.getElementById('id_option_two');
+const optionThreeInput = document.getElementById('id_option_three');
+const optionFourInput = document.getElementById('id_option_four');
 
-const csrf = document.getElementsByName('csrfmiddlewaretoken')
+const quizForm = document.getElementById('quiz-form');
+
+const quizTitleInput = document.getElementById('id_quiz_title');
+const topicInput = document.getElementById('id_topic');
+const numOfQuestionInput = document.getElementById('id_num_of_question');
+const timeInput = document.getElementById('id_time');
+
+const csrf = document.getElementsByName('csrfmiddlewaretoken');
 
 
-modalBtns.forEach(modalBtn => modalBtn.addEventListener('click', () => {
-	const pk = modalBtn.getAttribute('data-pk')
-	const title = modalBtn.getAttribute('data-quiz')
-	modalTitle.innerHTML = title
+startModals.forEach(startModal => startModal.addEventListener('click', () => {
+	const pk = startModal.getAttribute('data-pk');
+	const title = startModal.getAttribute('data-quiz');
+	modalTitle.innerHTML = title;
 
 	startBtn.addEventListener('click', () => {
-		// quizView.classList.add('not-visible')
-		window.location.href = url + pk
+		window.location.href = url + pk;
 	});
 }))
 
+addModals.forEach(addModal => addModal.addEventListener('click', () => {
+	const pk = addModal.getAttribute('data-pk');
+	const title = addModal.getAttribute('data-quiz');
+	
+	addForm.dataset.formId = pk;
+	addTitle.innerHTML = title;
+}))
 
-quizForm.addEventListener('submit', e=> {
-	e.preventDefault()
+addForm.addEventListener('submit', e=> {
+	e.preventDefault();
+	const quizId = e.target.getAttribute('data-form-id');
 
 	$.ajax({
 		type: 'POST',
-		url: quizUrl,
+		url: '/add/',
+		data: {
+			'csrfmiddlewaretoken': csrf[0].value,
+			'pk': quizId,
+			'question_text': questionTextInput.value,
+			'correct_num': correctNumInput.value,
+			'option_one': optionOneInput.value,
+			'option_two': optionTwoInput.value,
+			'option_three': optionThreeInput.value,
+			'option_four': optionFourInput.value
+		},
+		success: function(response) {
+			$('#addQuestion').modal('hide');
+			addForm.reset();
+		},
+		error: function(error) {
+			console.log('Oops... error has occured');
+			console.log(error);
+		}
+	})
+})
+
+
+quizForm.addEventListener('submit', e=> {
+	e.preventDefault();
+
+	$.ajax({
+		type: 'POST',
+		url: '/create/',
 		data: {
 			'csrfmiddlewaretoken': csrf[0].value,
 			'quiz_title': quizTitleInput.value,
@@ -42,13 +86,12 @@ quizForm.addEventListener('submit', e=> {
 			'time': timeInput.value
 		},
 		success: function(response) {
-
-			$('#createQuiz').modal('hide')
-			quizForm.reset()
+			$('#createQuiz').modal('hide');
+			quizForm.reset();
 		},
 		error: function(error) {
-			console.log('Oops... error has occured')
-			console.log(error)
+			console.log('Oops... error has occured');
+			console.log(error);
 		}
 	})
 })

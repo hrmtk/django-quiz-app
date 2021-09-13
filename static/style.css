@@ -10,6 +10,11 @@ body {
 }
 
 /* Navbar */
+/*"navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd; opacity: 0.8;"*/
+.navbar {
+  background: #e3f2fd;
+  opacity: 0.8;
+}
 .nav-link {
   border-bottom: 5px solid transparent;
 }
@@ -22,7 +27,7 @@ body {
 	font-family: 'Orbitron', sans-serif;
 }
 
-/* home page*/
+/* Home view */
 .card {
 	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(146,219,222,1) 0%, rgba(252,252,252,1) 100%);
 	opacity: 0.9;
@@ -41,7 +46,7 @@ body {
 	transform: scale(1.2);
 }
 
-/* Question page*/
+/* Question page */
 #quiz-box {
 	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(146,219,222,1) 0%, rgba(252,252,252,1) 100%);
 	font-family: 'Poppins', sans-serif;
@@ -105,16 +110,31 @@ body {
   margin-bottom: 30px;
 }
 
-.btn-light:hover {
-	background-color: #f76b8a;
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  color: white;
-}
-
 .form-items a:link {
   color: #f76b8a; 
-  background-color: transparent; 
+  background: transparent; 
   text-decoration: none;
+}
+
+/* Button */
+.btn-info:hover {
+  color: #eaf6f6;
+}
+
+.btn-outline-light {
+  color: #eaf6f6;
+  background: #f76b8a;
+  opacity: 0.9;
+  border: none !important;
+}
+
+.btn-outline-light:hover {
+	color: #f76b8a;
+  background: #eaf6f6;
+  border: none !important;
+}
+
+.btn-light:hover {
+  color: #eaf6f6;
+  background: #f76b8a;
 }
