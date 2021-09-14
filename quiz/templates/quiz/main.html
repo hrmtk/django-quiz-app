@@ -18,12 +18,15 @@ Quiz List
 {% block content %}
 
 <div class="container" id="quiz-list-view">
-  <!-- Button trigger create quiz modal -->
-  <button type="button" class="btn btn-outline-light mb-2" data-bs-toggle="modal" data-bs-target="#createQuiz">
-    create quiz
-  </button>
 
-  <div class="row row-cols-1 row-cols-md-3 g-4">
+  {% if user.is_authenticated %}
+    <!-- Button trigger create quiz modal -->
+    <button type="button" class="btn btn-outline-light mb-2" data-bs-toggle="modal" data-bs-target="#createQuiz">
+    create quiz
+    </button>
+  {% endif %}
+
+  <div class="row row-cols-1 row-cols-md-3 g-4" id="quiz-card">
 
     {% for obj in objects %}
     
@@ -35,7 +38,7 @@ Quiz List
             <div class="card-text text-left">
               <dl>
                 <dt>Number of questions</dt>
-                <dd>{{obj.number_of_question}}</dd>
+                <dd id="numq-card-{{obj.id}}">{{obj.number_of_question}}</dd>
                 <dt>Duration</dt>
                 <dd>{{obj.time}} min(s)</dd>
                 <dt>Created by</dt>
@@ -127,11 +130,10 @@ Quiz List
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="addModal"></h5>
-        <!-- <h5 class="modal-title" id="exampleModalLabel">Add question</h5> -->
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="add-form" data-form-id="ore">
+        <form id="add-form" data-form-id="">
           {% csrf_token %}
           {{ form2|crispy }}
           <div class="modal-footer">

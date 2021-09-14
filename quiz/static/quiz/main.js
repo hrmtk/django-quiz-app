@@ -16,6 +16,7 @@ const optionThreeInput = document.getElementById('id_option_three');
 const optionFourInput = document.getElementById('id_option_four');
 
 const quizForm = document.getElementById('quiz-form');
+const quizCard = document.getElementById('quiz-card');
 
 const quizTitleInput = document.getElementById('id_quiz_title');
 const topicInput = document.getElementById('id_topic');
@@ -43,9 +44,11 @@ addModals.forEach(addModal => addModal.addEventListener('click', () => {
 	addTitle.innerHTML = title;
 }))
 
+
 addForm.addEventListener('submit', e=> {
 	e.preventDefault();
 	const quizId = e.target.getAttribute('data-form-id');
+	console.log(quizId)
 
 	$.ajax({
 		type: 'POST',
@@ -61,6 +64,8 @@ addForm.addEventListener('submit', e=> {
 			'option_four': optionFourInput.value
 		},
 		success: function(response) {
+			const numOfQestion = document.getElementById(`numq-card-${quizId}`);
+			numOfQestion.innerHTML = `${parseInt(numOfQestion.innerHTML) + 1}`;
 			$('#addQuestion').modal('hide');
 			addForm.reset();
 		},
@@ -70,7 +75,6 @@ addForm.addEventListener('submit', e=> {
 		}
 	})
 })
-
 
 quizForm.addEventListener('submit', e=> {
 	e.preventDefault();
@@ -86,6 +90,7 @@ quizForm.addEventListener('submit', e=> {
 			'time': timeInput.value
 		},
 		success: function(response) {
+      window.location.href = window.location.origin
 			$('#createQuiz').modal('hide');
 			quizForm.reset();
 		},
@@ -95,4 +100,3 @@ quizForm.addEventListener('submit', e=> {
 		}
 	})
 })
-

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from .models import Topic, Quiz, Question, Result
 from .forms import QuizForm, QuestionForm
@@ -18,6 +19,7 @@ def home_view(request):
 	return render(request, 'quiz/main.html', context)
 	
 
+@login_required
 def create_quiz(request):
 	if request.is_ajax():
 		form = QuizForm(request.POST)
@@ -25,9 +27,16 @@ def create_quiz(request):
 			instance = form.save(commit=False)
 			instance.created_by = request.user
 			instance.save()
-		return JsonResponse({})
+			return JsonResponse({
+				'quiz_title': instance.quiz_title,
+				'topic': instance.topic.topic_title,
+				'time': instance.time,
+				'created_by': instance.created_by.username,
+				'id': instance.id
+			})
 
 
+@login_required
 def add_question(request):
 	if request.is_ajax():
 		form = QuestionForm(request.POST)
