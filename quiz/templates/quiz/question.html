@@ -15,21 +15,18 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
-	<div>
-		<h1> <span class="badge bg-secondary time-left">00:00</span></h1>
-	</div>
-	<br>
-	<a href="{% url 'quiz:home_view' %}" button class="btn btn-light mt-3 mb-3">back</a>
-	<div id="alert-box"></div>
+<div>
+	<h1> <span class="badge bg-secondary time-left">00:00</span></h1>
+</div>
+<br>
+<a href="{% url 'quiz:home_view' %}" button class="btn btn-light mt-3 mb-3">back</a>
+<div id="alert-box"></div>
 
-	<form id="quiz-form" class="mt-3 mb-3">
-		{% csrf_token %}
-		<div id="quiz-box"></div>
-		<button type="submit" class="btn btn-info mt-3">save</button>
-	</form>
-{% else %}
+<form id="quiz-form" class="mt-3 mb-3">
+	{% csrf_token %}
+	<div id="quiz-box"></div>
+	<button type="submit" class="btn btn-info mt-3">save</button>
+</form>
 
-{% endif %}
 
 {% endblock %}

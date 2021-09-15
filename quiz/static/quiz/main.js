@@ -1,5 +1,3 @@
-const url = window.location.href;
-
 const startModals = [...document.getElementsByClassName('start-modal')];
 const modalTitle = document.getElementById('modalTitle');
 const startBtn = document.getElementById('start-button');
@@ -20,8 +18,9 @@ const quizCard = document.getElementById('quiz-card');
 
 const quizTitleInput = document.getElementById('id_quiz_title');
 const topicInput = document.getElementById('id_topic');
-const numOfQuestionInput = document.getElementById('id_num_of_question');
 const timeInput = document.getElementById('id_time');
+
+const alertBox = document.getElementById('alert-box');
 
 const csrf = document.getElementsByName('csrfmiddlewaretoken');
 
@@ -32,7 +31,7 @@ startModals.forEach(startModal => startModal.addEventListener('click', () => {
 	modalTitle.innerHTML = title;
 
 	startBtn.addEventListener('click', () => {
-		window.location.href = url + pk;
+		window.location.href = window.location.origin + `/${pk}/`;
 	});
 }))
 
@@ -44,11 +43,9 @@ addModals.forEach(addModal => addModal.addEventListener('click', () => {
 	addTitle.innerHTML = title;
 }))
 
-
 addForm.addEventListener('submit', e=> {
 	e.preventDefault();
 	const quizId = e.target.getAttribute('data-form-id');
-	console.log(quizId)
 
 	$.ajax({
 		type: 'POST',
@@ -68,9 +65,12 @@ addForm.addEventListener('submit', e=> {
 			numOfQestion.innerHTML = `${parseInt(numOfQestion.innerHTML) + 1}`;
 			$('#addQuestion').modal('hide');
 			addForm.reset();
+			handleAlerts('info', 'Added question');
 		},
 		error: function(error) {
+			handleAlerts('danger', 'Oops... error has occured');
 			console.log('Oops... error has occured');
+
 			console.log(error);
 		}
 	})
@@ -86,7 +86,6 @@ quizForm.addEventListener('submit', e=> {
 			'csrfmiddlewaretoken': csrf[0].value,
 			'quiz_title': quizTitleInput.value,
 			'topic': topicInput.value,
-			'num_of_question': numOfQuestionInput.value,
 			'time': timeInput.value
 		},
 		success: function(response) {

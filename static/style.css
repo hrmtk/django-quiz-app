@@ -138,3 +138,33 @@ body {
   color: #eaf6f6;
   background: #f76b8a;
 }
+
+/* Pagination */
+.pagination > li > a
+{
+    background: white;
+    color: #f76b8a;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #5a5a5a;
+    background: #eee;
+    border-color: #ddd;
+}
+
+.pagination > .active > span
+{
+    color: white;
+    background: #f76b8a !Important;
+    border: solid 1px #f76b8a !Important;
+}
+
+.pagination > .active > span:hover
+{
+    background: #f76b8a !Important;
+    border: solid 1px #f76b8a;
+}

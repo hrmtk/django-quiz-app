@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.db.models import Count
 from .models import Topic, Quiz, Question, Result
 from .forms import QuizForm, QuestionForm
 
 
 def home_view(request):
-	objects = Quiz.objects.annotate(number_of_question=Count('question'))
+	quiz = Quiz.objects.annotate(number_of_question=Count('question'))
+	paginator = Paginator(quiz, 6)
+	page_number = request.GET.get('page')
+	objects = paginator.get_page(page_number)
 	form1 = QuizForm()
 	form2 = QuestionForm()
 	context = {
@@ -46,7 +50,7 @@ def add_question(request):
 			instance = form.save(commit=False)
 			instance.quiz = quiz
 			instance.save()
-		return JsonResponse({})
+			return JsonResponse({})
 
 
 def question_view(request, pk):

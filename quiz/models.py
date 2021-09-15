@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 import random
 
 TOPIC_CHOICES = (
@@ -21,11 +22,9 @@ class Topic(models.Model):
 class Quiz(models.Model):
 	quiz_title = models.CharField(max_length=200)
 	topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-	num_of_question = models.IntegerField()
-	time = models.IntegerField(help_text='duration of the quiz in minutes')
-	# required_score = models.IntegerField(help_text="required score in %")
+	time = models.PositiveIntegerField(help_text='duration of the quiz in minutes')
 	created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-	# created_time = models.DateTimeField(auto_now_add=True)
+	created_time = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
 		return str(self.quiz_title)
@@ -37,13 +36,13 @@ class Quiz(models.Model):
 
 	class Meta:
 		verbose_name_plural = 'Quizzes'
-		# ordering = ("-created_time",)
+		ordering = ("-created_time",)
 
 
 class Question(models.Model):
 	question_text = models.CharField(max_length=200)
 	quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-	correct_num = models.IntegerField()
+	correct_num = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(4)])
 	option_one = models.CharField(max_length=200)
 	option_two = models.CharField(max_length=200)
 	option_three = models.CharField(max_length=200)
@@ -55,7 +54,7 @@ class Question(models.Model):
 
 class Result(models.Model):
 	quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
 	score = models.FloatField()
 	created = models.DateTimeField(auto_now_add=True)
 

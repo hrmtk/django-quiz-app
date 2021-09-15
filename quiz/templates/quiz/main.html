@@ -17,8 +17,8 @@ Quiz List
 
 {% block content %}
 
-<div class="container" id="quiz-list-view">
 
+<div class="container" id="quiz-list-view">
   {% if user.is_authenticated %}
     <!-- Button trigger create quiz modal -->
     <button type="button" class="btn btn-outline-light mb-2" data-bs-toggle="modal" data-bs-target="#createQuiz">
@@ -63,7 +63,7 @@ Quiz List
               class="btn btn-outline-success modal-button add-modal" 
               data-pk="{{ obj.pk }}"
               data-quiz="{{ obj.quiz_title }}"
-              data-bs-toggle="modal" 
+              data-bs-toggle="modal"
               data-bs-target="#addQuestion"
               >
               add
@@ -78,6 +78,29 @@ Quiz List
 
     {% endfor %}
   </div>
+</div>
+
+<!-- Pagination -->
+<div class="container p-4">
+  <ul class="pagination justify-content-center">
+      {% if objects.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ objects.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+          <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+      {% endif %}
+      {% for i in objects.paginator.page_range %}
+          {% if objects.number == i %}
+              <li class="page-item active"><span class="page-link">{{ i }}</li>
+          {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+      {% endfor %}
+      {% if objects.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ objects.next_page_number }}">&raquo;</a></li>
+      {% else %}
+          <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+      {% endif %}
+  </ul>
 </div>
 
 
@@ -130,6 +153,8 @@ Quiz List
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="addModal"></h5>
+
+        <div id="alert-box"></div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
