@@ -7,7 +7,7 @@ $.ajax({
 	type: 'GET',
 	url: `${url}detail`,
 	success: function(res) {
-		const data = res.data;
+		const time = res.time * 60;
 		const questions = res.questions;
 		questions.forEach(el => {
 			Object.keys(el).forEach(function(key) {
@@ -33,7 +33,7 @@ $.ajax({
 				`
 			})
 		})
-		timer(10);
+		timer(time);
 	},
 	error: function(error) {
 		console.log('error', error);

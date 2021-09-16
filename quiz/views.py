@@ -78,7 +78,7 @@ def question_detail_view(request, pk):
 		questions.append({q.question_text: ques_answers})
 
 	return JsonResponse({
-		'data': quiz.quiz_title,
+		'time': quiz.time,
 		'questions': questions,
 	})
 
