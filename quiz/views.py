@@ -89,7 +89,7 @@ def save_answer_view(request, pk):
 		answer_ = dict(answer.lists())
 		answer_.pop('csrfmiddlewaretoken')
 		quiz = Quiz.objects.get(pk=pk)
-		user = request.user
+		# user = request.user
 		questions = [
 			Question.objects.get(question_text=key, quiz=quiz)
 			for key in answer_.keys()
@@ -110,6 +110,16 @@ def save_answer_view(request, pk):
 		score_ = score * 100 / num_of_q
 
 		# Save result
-		# Result.objects.create(quiz=quiz, user=user, score=score_)
+		if request.user.is_authenticated:
+			Result.objects.create(
+				quiz=quiz,
+				user=request.user,
+				score=score_
+			)
+		else:
+			return JsonResponse({
+				'results': results,
+				'score': score_
+			})
 
 		return JsonResponse({'results': results, 'score': score_})
