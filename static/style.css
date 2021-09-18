@@ -45,6 +45,12 @@ body {
 	transform: scale(1.2);
 }
 
+/* Result view */
+.result-table {
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(146,219,222,1) 0%, rgba(252,252,252,1) 100%);
+  opacity: 0.9;
+}
+
 /* Question page */
 .time-left {
   color: #eaf6f6;

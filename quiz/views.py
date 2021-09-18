@@ -24,6 +24,12 @@ def home_view(request):
 	
 
 @login_required
+def result_view(request):
+	results = Result.objects.filter(user=request.user)
+	return render(request, 'quiz/result.html', {'results': results})
+
+
+@login_required
 def create_quiz(request):
 	if request.is_ajax():
 		form = QuizForm(request.POST)
@@ -109,7 +115,7 @@ def save_answer_view(request, pk):
 		num_of_q = len(quiz.get_questions())
 		score_ = score * 100 / num_of_q
 
-		# Save result
+		# If user logged in, save the result
 		if request.user.is_authenticated:
 			Result.objects.create(
 				quiz=quiz,

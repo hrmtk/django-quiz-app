@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block scripts %}
+{% endblock scripts %}
+
+{% block title %}
+Results
+{% endblock title %}
+
+{% block page-title %}
+Results
+{% endblock %}
+
+{% block content %}
+
+<table class="table result-table">
+  <thead>
+    <tr class="table">
+      <th scope="col">Quiz</th>
+      <th scope="col">Score</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  {% for result in results %}
+  <tbody>
+  	{% if result.score > 60 %}
+    	<tr class="table">
+    {% else %}
+    	<tr class="table-secondary">
+    {% endif %}
+      	<td>{{result.quiz}}</td>
+      	<td>{{result.score}}</td>
+      	<td>{{result.created}}</td>
+    	</tr>
+  </tbody>
+  {% endfor %}
+</table>
+
+{% endblock %}
