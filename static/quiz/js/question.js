@@ -7,36 +7,38 @@ $.ajax({
 	type: 'GET',
 	url: `${url}detail`,
 	success: function(res) {
-		const time = res.time * 60;
-		const questions = res.questions;
-		questions.forEach(el => {
-			Object.keys(el).forEach(function(key) {
+		// const time = res.time * 60;
+		// const questions = res.questions;
+		// questions.forEach(el => {
+		// 	Object.keys(el).forEach(function(key) {
 
-				quizBox.innerHTML += `
-					<hr>
-					<div class="mb-2 ${key} h5">
-						<b>${key}</b>
-					</div>
-					`
-				let question_num = 0;
-				el[key].forEach(answer => {
-					quizBox.innerHTML += `
-						<div>
-							<label>${++question_num}.</label>
-							<input type="radio" class="answer" id="${key}-${answer}" name="${key}" value="${answer}">
-							<label for="${key}">${answer}</label>
-						</div>
-					`
-				})
-				quizBox.innerHTML +=	`
-					<div id="${key}-msg" class="checked-msg"></div>
-				`
-			})
-		})
-		timer(time);
+		// 		quizBox.innerHTML += `
+		// 			<hr>
+		// 			<div class="mb-2 ${key} h5">
+		// 				<b>${key}</b>
+		// 			</div>
+		// 			`
+		// 		let question_num = 0;
+		// 		el[key].forEach(answer => {
+		// 			quizBox.innerHTML += `
+		// 				<div>
+		// 					<label>${++question_num}.</label>
+		// 					<input type="radio" class="answer" id="${key}-${answer}" name="${key}" value="${answer}">
+		// 					<label for="${key}">${answer}</label>
+		// 				</div>
+		// 			`
+		// 		})
+		// 		quizBox.innerHTML +=	`
+		// 			<div id="${key}-msg" class="checked-msg"></div>
+		// 		`
+		// 	})
+		// })
+		// timer(time);
+		console.log('hello')
 	},
 	error: function(error) {
-		console.log('error', error);
+		console.log('error has occured', error);
+		console.log(url)
 	}
 })
 

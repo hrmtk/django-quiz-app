@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital@0;1&family=Orbitron:wght@400;500;700;800;900&family=Poppins:wght@300;400;700;900&display=swap');
 
 body {
-	background: url("/static/img/bubbles.jpg") 100% 0 no-repeat fixed;
+	background: url("/static/quiz/img/bubbles.jpg") 100% 0 no-repeat fixed;
 	font-family: 'Poppins', sans-serif;
 }
 

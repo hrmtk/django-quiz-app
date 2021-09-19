@@ -1,13 +1,13 @@
-{% extends 'base.html' %}
+{% extends 'quiz/base.html' %}
 {% load static %}
 
 {% block scripts %}
-	<script src="{% static 'quiz/question.js' %}" defer></script>
-{% endblock scripts %}
+	<script src="{% static 'quiz/js/question.js' %}" defer></script>
+{% endblock %}
 
 {% block title %}
 {{ quiz.quiz_title }}
-{% endblock title %}
+{% endblock %}
 
 {% block page-title %}
 {{ quiz.quiz_title }}
@@ -27,6 +27,5 @@
 	<div id="quiz-box"></div>
 	<button type="submit" class="btn btn-info mt-3">save</button>
 </form>
-
 
 {% endblock %}

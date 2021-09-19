@@ -70,7 +70,6 @@ addForm.addEventListener('submit', e=> {
 		error: function(error) {
 			handleAlerts('danger', 'Oops... error has occured');
 			console.log('Oops... error has occured');
-
 			console.log(error);
 		}
 	})

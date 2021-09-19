@@ -71,6 +71,7 @@ def question_view(request, pk):
 
 
 def question_detail_view(request, pk):
+	print('from detail view')
 	quiz = Quiz.objects.get(pk=pk)
 	ques = quiz.get_questions()
 	questions = []
@@ -95,7 +96,6 @@ def save_answer_view(request, pk):
 		answer_ = dict(answer.lists())
 		answer_.pop('csrfmiddlewaretoken')
 		quiz = Quiz.objects.get(pk=pk)
-		# user = request.user
 		questions = [
 			Question.objects.get(question_text=key, quiz=quiz)
 			for key in answer_.keys()

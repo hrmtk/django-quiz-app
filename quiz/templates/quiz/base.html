@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +8,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- favicon -->
-	<link rel="icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+	<link rel="icon" type="image/png" href="{% static 'quiz/img/favicon.ico' %}"/>
 
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
 	<!-- Custom css -->
-	<link rel="stylesheet" href="{% static 'style.css' %}">
+	<link rel="stylesheet" href="{% static 'quiz/css/style.css' %}">
 
 	<!-- Custom js -->
-	<script src="{% static 'functions.js' %}" defer></script>
+	<script src="{% static 'quiz/js/functions.js' %}" defer></script>
 	{% block scripts %}
 	{% endblock %}
 
