@@ -9,6 +9,7 @@ from .forms import QuizForm, QuestionForm
 
 def home_view(request):
 	quiz = Quiz.objects.annotate(number_of_question=Count('question'))
+	quiz = quiz.order_by("-created_time").all()
 	paginator = Paginator(quiz, 6)
 	page_number = request.GET.get('page')
 	objects = paginator.get_page(page_number)
@@ -26,6 +27,7 @@ def home_view(request):
 @login_required
 def result_view(request):
 	results = Result.objects.filter(user=request.user)
+	results = results.order_by("-created").all()
 	return render(request, 'quiz/result.html', {'results': results})
 
 
@@ -71,7 +73,6 @@ def question_view(request, pk):
 
 
 def question_detail_view(request, pk):
-	print('from detail view')
 	quiz = Quiz.objects.get(pk=pk)
 	ques = quiz.get_questions()
 	questions = []
@@ -113,7 +114,7 @@ def save_answer_view(request, pk):
 				message = f"Your answer: {ans}, Correct: {q.correct_num}"
 			results.append({str(q.question_text): message})
 		num_of_q = len(quiz.get_questions())
-		score_ = score * 100 / num_of_q
+		score_ = round(score * 100 / num_of_q, 2)
 
 		# If user logged in, save the result
 		if request.user.is_authenticated:

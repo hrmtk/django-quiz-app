@@ -1,51 +1,49 @@
-// Get data
 const url = window.location.href;
 const quizBox = document.getElementById('quiz-box');
 const alertBox = document.getElementById('alert-box');
 
+const quizForm = document.getElementById('quiz-form');
+const csrf = document.getElementsByName('csrfmiddlewaretoken');
+
+let countdown;
+const timerDisplay = document.querySelector('.time-left');
+
 $.ajax({
 	type: 'GET',
-	url: `${url}detail`,
-	success: function(res) {
-		// const time = res.time * 60;
-		// const questions = res.questions;
-		// questions.forEach(el => {
-		// 	Object.keys(el).forEach(function(key) {
+	url: `${url}detail/`,
+	success: function(response) {
+		const time = response.time * 60;
+		const questions = response.questions;
+		questions.forEach(el => {
+			Object.keys(el).forEach(function(key) {
 
-		// 		quizBox.innerHTML += `
-		// 			<hr>
-		// 			<div class="mb-2 ${key} h5">
-		// 				<b>${key}</b>
-		// 			</div>
-		// 			`
-		// 		let question_num = 0;
-		// 		el[key].forEach(answer => {
-		// 			quizBox.innerHTML += `
-		// 				<div>
-		// 					<label>${++question_num}.</label>
-		// 					<input type="radio" class="answer" id="${key}-${answer}" name="${key}" value="${answer}">
-		// 					<label for="${key}">${answer}</label>
-		// 				</div>
-		// 			`
-		// 		})
-		// 		quizBox.innerHTML +=	`
-		// 			<div id="${key}-msg" class="checked-msg"></div>
-		// 		`
-		// 	})
-		// })
-		// timer(time);
-		console.log('hello')
+				quizBox.innerHTML += `
+					<hr>
+					<div class="mb-2 ${key} h5">
+						<b>${key}</b>
+					</div>
+					`
+				let question_num = 0;
+				el[key].forEach(answer => {
+					quizBox.innerHTML += `
+						<div>
+							<label>${++question_num}.</label>
+							<input type="radio" class="answer" id="${key}-${answer}" name="${key}" value="${answer}">
+							<label for="${key}">${answer}</label>
+						</div>
+					`
+				})
+				quizBox.innerHTML +=	`
+					<div id="${key}-msg" class="checked-msg"></div>
+				`
+			})
+		})
+		timer(time);
 	},
 	error: function(error) {
 		console.log('error has occured', error);
-		console.log(url)
 	}
 })
-
-
-// Send answer
-const quizForm = document.getElementById('quiz-form');
-const csrf = document.getElementsByName('csrfmiddlewaretoken');
 
 const sendAnswer = () => {
 	const elements = [...document.getElementsByClassName('answer')];
@@ -65,9 +63,9 @@ const sendAnswer = () => {
 		type: 'POST',
 		url: `${url}save/`,
 		data: answered,
-		success: function(res) {
-			results = res.results;
-			score = res.score;
+		success: function(response) {
+			results = response.results;
+			score = response.score;
 
 			results.forEach(result => {
 				for (const [question, message] of Object.entries(result)) {
@@ -83,7 +81,7 @@ const sendAnswer = () => {
 			}
 		},
 		error: function(error) {
-			console.log(error);
+			console.log('error has occured', error);
 		}
 	})
 }
@@ -93,10 +91,6 @@ quizForm.addEventListener('submit', e=> {
 	sendAnswer();
 	clearInterval(countdown)}
 )
-
-// Countdown timer
-let countdown;
-const timerDisplay = document.querySelector('.time-left');
 
 function timer(seconds) {
 	clearInterval(countdown);

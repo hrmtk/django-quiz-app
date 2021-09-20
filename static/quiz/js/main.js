@@ -24,7 +24,6 @@ const alertBox = document.getElementById('alert-box');
 
 const csrf = document.getElementsByName('csrfmiddlewaretoken');
 
-
 startModals.forEach(startModal => startModal.addEventListener('click', () => {
 	const pk = startModal.getAttribute('data-pk');
 	const title = startModal.getAttribute('data-quiz');
