@@ -107,11 +107,17 @@ def save_answer_view(request, pk):
 		for q in questions:
 			message = ""
 			ans = answer_[q.question_text][0]
-			if (ans.isdigit() and int(ans) == q.correct_num):
+			options = {
+				1: q.option_one,
+				2: q.option_two,
+				3: q.option_three,
+				4: q.option_four
+			}
+			if (ans == options[q.correct_num]):
 				score += 1
 				message = "Correct!"
 			else:
-				message = f"Your answer: {ans}, Correct: {q.correct_num}"
+				message = f"Your answer: {ans}, Correct: {q.correct_num} - {options[q.correct_num]}"
 			results.append({str(q.question_text): message})
 		num_of_q = len(quiz.get_questions())
 		score_ = round(score * 100 / num_of_q, 2)

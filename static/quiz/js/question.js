@@ -89,8 +89,9 @@ const sendAnswer = () => {
 quizForm.addEventListener('submit', e=> {
 	e.preventDefault();
 	sendAnswer();
-	clearInterval(countdown)}
-)
+	clearInterval(countdown);
+	window.scrollTo({ top: 0, behavior: 'smooth' });
+})
 
 function timer(seconds) {
 	clearInterval(countdown);
