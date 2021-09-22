@@ -19,15 +19,15 @@ $.ajax({
 
 				quizBox.innerHTML += `
 					<hr>
-					<div class="mb-2 ${key} h5">
-						<b>${key}</b>
+					<div class="mb-2 q-title">
+						${key}
 					</div>
 					`
 				let question_num = 0;
 				el[key].forEach(answer => {
 					quizBox.innerHTML += `
 						<div>
-							<label>${++question_num}.</label>
+							<label class="q-num">${++question_num}.</label>
 							<input type="radio" class="answer" id="${key}-${answer}" name="${key}" value="${answer}">
 							<label for="${key}">${answer}</label>
 						</div>
@@ -79,6 +79,7 @@ const sendAnswer = () => {
 			} else {
 				handleAlerts('danger', `Oops...Your score is ${score.toFixed(2)} %`);
 			}
+			window.scrollTo({ top: 0, behavior: 'smooth' });
 		},
 		error: function(error) {
 			console.log('error has occured', error);
@@ -90,7 +91,6 @@ quizForm.addEventListener('submit', e=> {
 	e.preventDefault();
 	sendAnswer();
 	clearInterval(countdown);
-	window.scrollTo({ top: 0, behavior: 'smooth' });
 })
 
 function timer(seconds) {

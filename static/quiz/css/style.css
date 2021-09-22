@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital@0;1&family=Orbitron:wght@400;500;700;800;900&family=Poppins:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital@0;1&family=Orbitron:wght@400;500;700;800;900&family=Poppins:wght@300;400;500;700;900&display=swap');
 
 body {
 	background: url("/static/quiz/img/bubbles.jpg") 100% 0 no-repeat fixed;
@@ -14,6 +14,7 @@ body {
   background: #e3f2fd;
   opacity: 0.8;
 }
+
 .nav-link {
   border-bottom: 5px solid transparent;
 }
@@ -32,6 +33,14 @@ body {
 	opacity: 0.9;
 	transition: .5s ease;
 	min-width:13rem;
+}
+
+dt {
+  font-weight: 500;
+}
+
+dd {
+  color: #198754;
 }
 
 .card-header {
@@ -59,14 +68,22 @@ body {
   padding: 5px 10px;
   font-family: 'Anonymous Pro', monospace;
 }
+
 #quiz-box {
 	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(146,219,222,1) 0%, rgba(252,252,252,1) 100%);
-	font-family: 'Anonymous Pro', monospace;
 	padding-left: 20px;
 }
 
 #quiz-box > div {
 	padding: 8px 0;
+}
+
+.q-title {
+  font-size: 1.1rem;
+}
+
+.q-num {
+  min-width: 14px;
 }
 
 .answer {

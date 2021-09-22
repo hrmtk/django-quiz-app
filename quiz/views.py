@@ -129,10 +129,5 @@ def save_answer_view(request, pk):
 				user=request.user,
 				score=score_
 			)
-		else:
-			return JsonResponse({
-				'results': results,
-				'score': score_
-			})
 
 		return JsonResponse({'results': results, 'score': score_})
