@@ -1,0 +1,2 @@
+## Manabit
+This is a final project for HarvardX CS50's Web Programming with Python and JavaScript. Manabit is a Web Application that has made for learners who bring a lot of energy and enthusiasm to acquire new knowledge and skills. Users can create their own quizzes and take them whenever they want.
