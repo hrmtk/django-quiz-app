@@ -11,26 +11,26 @@ This is a final project for HarvardX CS50's Web Programming with Python and Java
   - This app is mobile-responsive.
 
 ### Files
-This project contains 2 apps(`members` and `quiz`) and a `static` directory:
+This project contains two apps(`members` and `quiz`) and a `static` directory:
 * `quiz_proj`
   * `quiz_proj` - the actual python package for this project.
     * `settings.py` - settings and configuration for this project.
     * `urls.py` - the URL declarations for this project.
-  * `members`
-    * `templates/registration`
-      * `login.html`
-      * `register.html`
-    * `urls.py`
-    * `views.py`
-  * `quiz` -
-    * `templates/quiz`
-      * `base.html`
-      * `main.html`
-      * `question.html`
-      * `result.html`
-    * `admin.py`
-    * `forms.py`
-    * `models.py`
+  * `members` - the user authentication app
+    * `templates/registration` - contains login and register templates.
+      * `login.html` - a template for login form.
+      * `register.html` - a template for register form.
+    * `urls.py` - contains a path to register
+    * `views.py` - contains login and register views.
+  * `quiz` - the main app for this project.
+    * `templates/quiz` - contains all templates of the quiz app.
+      * `base.html` - all other templates extend this base template.
+      * `main.html` - a template that shows all quizzes.
+      * `question.html` - a template that shows  questions of the quiz which the user has selected.
+      * `result.html` - a template that shows the user results.
+    * `admin.py` - imports and registers models.
+    * `forms.py` - defines `QuizForm` class with Quiz model and `QuestionForm` class with Question model.
+    * `models.py` - defines four models. `Topic`(category of quiz), `Quiz`()
     * `urls.py`
     * `views.py`
   * `static/quiz`
@@ -44,5 +44,5 @@ This project contains 2 apps(`members` and `quiz`) and a `static` directory:
       * `main.js`
       * `question.js`
   * `Procfile`
-  * `requirements.txt`
+  * `requirements.txt` - python packages that need to be installed to run this app.
 
