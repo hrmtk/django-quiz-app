@@ -17,6 +17,8 @@ Quiz List
 {% block content %}
 
 <div class="container" id="quiz-list-view">
+  <div id="alert-box"></div>
+  
   {% if user.is_authenticated %}
     <!-- Button trigger create quiz modal -->
     <button type="button" class="btn btn-outline-light mb-2" data-bs-toggle="modal" data-bs-target="#createQuiz">
@@ -149,7 +151,7 @@ Quiz List
       <div class="modal-header">
         <h5 class="modal-title" id="addModal"></h5>
 
-        <div id="alert-box"></div>
+        
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
