@@ -71,10 +71,10 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 Or
-* [Live Demo](https://hrmtk-manabit.herokuapp.com) - The app has been deployed to Heroku.
+* 🔥[Live Demo](https://hrmtk-manabit.herokuapp.com)🔥 - The app has been deployed to Heroku.
 
 ### API
-`GET /<int:pk>/detail`
+`GET /<int:pk>/detail`  
 Sending a GET request to /<int:pk>/detail will return (in JSON form) a list of all questions in that quiz, in random order. Representing one question:
 ```
 {
@@ -97,7 +97,7 @@ Sending a GET request to /<int:pk>/detail will return (in JSON form) a list of a
 }
 ```
 
-`POST /add/`
+`POST /add/`  
 The user who has created the quiz can send a POST to the /add/ route to add questions.
 ```
 $.ajax({
@@ -123,7 +123,7 @@ $.ajax({
 
 ```
 
-`POST /create/`
+`POST /create/`  
 The logged-in user can send a POST to the /create/route to create a new quiz.
 ```
 $.ajax({
@@ -145,7 +145,7 @@ $.ajax({
 
 ```
 
-`POST /<int:pk>/save/`
+`POST /<int:pk>/save/`  
 The user can send a POST to the /<int:pk>/save/ route to send the answer and show the score.
 
 ```
