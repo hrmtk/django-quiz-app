@@ -169,7 +169,8 @@ $.ajax({
 <p align="center">
   <img src="./quiz.gif" alt="Quiz app" />
 </p>
-Video Demo: [Here](https://youtu.be/AYnMPwP31v8)
+
+* Video Demo: [Here](https://youtu.be/AYnMPwP31v8)
 
 ### Inspiration
 * [HarvardX CS50's Web Programming with Python and JavaScript](https://cs50.harvard.edu/web/2020/)
