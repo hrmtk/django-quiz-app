@@ -171,6 +171,10 @@ $.ajax({
   })
 ```
 
+### Certificate
+
+* [Yay!](https://cs50.harvard.edu/certificates/f6ac2f57-ccf7-4d9c-a081-d978f823ea5a)
+
 ### Inspiration
 * [HarvardX CS50's Web Programming with Python and JavaScript](https://cs50.harvard.edu/web/2020/)
 * [How to create a Quiz app in Django with Javascript by Pyplane on YouTube](https://youtu.be/vXXfXRf2S4M)
